@@ -1,11 +1,7 @@
 package org.sid.controller;
 
-import java.util.Date;
 import java.util.List;
-
 import org.sid.entity.Categories;
-import org.sid.entity.Dependency;
-import org.sid.entity.User;
 import org.sid.service.CategoriesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,11 +20,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class CategoriesController {
 	@Autowired
 	private CategoriesService categoriesService;
+
 	@PostMapping("/categories")
 	public Categories createCategories(@RequestBody Categories categories) {
-		
+
 		return categoriesService.createCategories(categories);
 	}
+
 	@PutMapping("/categories")
 	public ResponseEntity<Categories> updateCategories(@RequestBody Categories categories) {
 
@@ -37,16 +35,18 @@ public class CategoriesController {
 
 		return new ResponseEntity<Categories>(categoriesService.updateCategories(categories), HttpStatus.OK);
 	}
+
 	@DeleteMapping("/categories/{idCategory}")
-	public ResponseEntity<Boolean> deleteCategoriesById(@PathVariable Long idCategory){
+	public ResponseEntity<Boolean> deleteCategoriesById(@PathVariable Long idCategory) {
 		boolean deleted = categoriesService.deleteCategories(idCategory);
-		if(deleted) return new ResponseEntity<Boolean>(deleted, HttpStatus.OK);
+		if (deleted)
+			return new ResponseEntity<Boolean>(deleted, HttpStatus.OK);
 		return new ResponseEntity<Boolean>(categoriesService.deleteCategories(idCategory), HttpStatus.BAD_REQUEST);
 	}
+
 	@GetMapping("/categories")
-	public List<Categories> getCategories(){
+	public List<Categories> getCategories() {
 		return categoriesService.getCategories();
 	}
-
 
 }

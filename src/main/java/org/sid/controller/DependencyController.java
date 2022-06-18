@@ -5,9 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.sid.entity.Dependency;
-import org.sid.entity.User;
 import org.sid.service.DependencyService;
-import org.sid.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -68,7 +66,6 @@ public class DependencyController {
 		List<Dependency> dependencyList = new ArrayList<>();
 
 		Pageable pageableRequest = PageRequest.of(page, limit);
-		
 
 		Page<Dependency> dependencyPage = dependencyService.getAllDependencyById(page, limit);
 
@@ -81,6 +78,7 @@ public class DependencyController {
 		return pages;
 
 	}
+
 	@GetMapping("/dependencyPageDate")
 	public Page<Dependency> getAllDependencyByDate(@RequestParam(value = "page", defaultValue = "1") int page,
 			@RequestParam(value = "limit", defaultValue = "10") int limit) {
@@ -88,7 +86,6 @@ public class DependencyController {
 		List<Dependency> dependencyList = new ArrayList<>();
 
 		Pageable pageableRequest = PageRequest.of(page, limit);
-		
 
 		Page<Dependency> dependencyPage = dependencyService.getAllDependencyByDate(page, limit);
 
@@ -100,18 +97,20 @@ public class DependencyController {
 
 		return pages;
 	}
-	
+
 	@DeleteMapping("/dependency/{id}")
-	public ResponseEntity<Boolean> deleteDependencyById(@PathVariable Long id){
+	public ResponseEntity<Boolean> deleteDependencyById(@PathVariable Long id) {
 		boolean deleted = dependencyService.deleteDependency(id);
-		if(deleted) return new ResponseEntity<Boolean>(deleted, HttpStatus.OK);
+		if (deleted)
+			return new ResponseEntity<Boolean>(deleted, HttpStatus.OK);
 		return new ResponseEntity<Boolean>(dependencyService.deleteDependency(id), HttpStatus.BAD_REQUEST);
-		
+
 	}
-	
+
 	@GetMapping("/dependency/date")
-	public List<Dependency> getAllDependencyOfYear(@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @RequestParam("year") int year){
-		
+	public List<Dependency> getAllDependencyOfYear(
+			@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @RequestParam("year") int year) {
+
 		return dependencyService.getAllDependencyOfYear(year);
 	}
 }
