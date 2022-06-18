@@ -28,6 +28,9 @@ public interface DependencyRepository extends JpaRepository<Dependency, Long> {
 	
 	@Query(value="FROM Dependency f ORDER BY f.date DESC")
 	public Page<Dependency> findByOrderByDateDesc(Pageable pageable);
+
+	@Query(value = "select d from Dependency d where extract(year from d.date) = :year")
+	public List<Dependency> getAllDependencyOfYear( @Param("year") int year);
 	
 //	public boolean deleteDependencyById(Long id);
 }

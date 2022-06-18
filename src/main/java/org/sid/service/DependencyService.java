@@ -21,6 +21,7 @@ public interface DependencyService {
 	 public List<Dependency> getAllBetweenDates(Date startDate, Date endDate);
 	  public Page<Dependency> getAllDependencyById(int page, int limit);
 	  public Page<Dependency> getAllDependencyByDate(int page, int limit);
+	public List<Dependency> getAllDependencyOfYear(int year);
 
 
 }

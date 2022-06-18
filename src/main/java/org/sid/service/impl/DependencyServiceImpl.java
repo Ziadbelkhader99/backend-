@@ -111,8 +111,13 @@ public class DependencyServiceImpl implements DependencyService {
 		dependencyRepository.deleteById(id);
 		Dependency d = dependencyRepository.findDependencyById(id);
 		if(d == null) return true;
-		return	false;
-		 
+		return	false; 
+	}
+
+	@Override
+	public List<Dependency> getAllDependencyOfYear(int year) {
+		
+		return dependencyRepository.getAllDependencyOfYear(year);
 	}
 
 }
