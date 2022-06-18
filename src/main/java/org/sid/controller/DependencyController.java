@@ -108,4 +108,10 @@ public class DependencyController {
 		return new ResponseEntity<Boolean>(dependencyService.deleteDependency(id), HttpStatus.BAD_REQUEST);
 		
 	}
+	
+	@GetMapping("/dependency/date")
+	public List<Dependency> getAllDependencyOfYear(@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @RequestParam("year") int year){
+		
+		return dependencyService.getAllDependencyOfYear(year);
+	}
 }
